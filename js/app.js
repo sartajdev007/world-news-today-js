@@ -39,7 +39,6 @@ const displayMenu = (categories) => {
     document.getElementById("01").classList.add("text-blue-500");
 };
 
-
 const loadCategory = (id) => {
     toggleLoader(true);
     let categoryId = 1;
@@ -53,14 +52,11 @@ const loadCategory = (id) => {
         .catch(error => console.log(error));
 }
 
-
 loadCategory()
 loadMenu()
 
 
 // display news script
-
-
 const displayNews = (allNews = []) => {
     // sorting from largest view
     const sortedNews = allNews?.sort((a, b) =>
@@ -87,7 +83,6 @@ const displayNews = (allNews = []) => {
         `;
     }
     for (let news of sortedNews) {
-        // console.log(news)
         const div = document.createElement('div');
         div.classList.add('card');
         div.classList.add('lg:card-side');
@@ -140,7 +135,5 @@ const displaydetails = news => {
     `
     }
 }
-
-
 
 displayNews()
