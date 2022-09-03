@@ -11,11 +11,10 @@ const displayMenu = (categories) => {
     for (const category of categories) {
         const id = category.category_id;
         const li = document.createElement('li');
-        li.innerHTML = `<a onclick="loadCategory(${id})">${category.category_name}</a>`
+        li.innerHTML = `<a id="category-btn" class="hover:bg-violet-700 hover:text-white" onclick="loadCategory(${id})">${category.category_name}</a>`
         menuContainer.appendChild(li);
     }
 }
-
 
 
 const loadCategory = (id) => {
@@ -28,6 +27,7 @@ const loadCategory = (id) => {
         .then(res => res.json())
         .then(data => displayNews(data.data))
 }
+
 
 loadCategory()
 loadMenu()
@@ -42,7 +42,7 @@ const displayNews = allNews => {
     if (allNews.length === 0) {
         const div = document.createElement('div');
         div.innerHTML = `
-        <h2 class="text-center text-xl text-red-500">No news today</h2>       
+        <h2 class="font-bold text-center text-3xl text-red-500">No news today</h2>       
         `
         newsContainer.appendChild(div)
         return;
@@ -52,6 +52,7 @@ const displayNews = allNews => {
         // console.log(news)
         const div = document.createElement('div');
         div.classList.add('card');
+        div.classList.add('lg:card-side');
         div.classList.add('card-side');
         div.classList.add('bg-base-100');
         div.classList.add('shadow-xl');
@@ -71,8 +72,8 @@ const displayNews = allNews => {
                         </div>
                     </div>
                     <div class="p-6 pl-8"><i class="fa-solid fa-eye"></i><span class="pl-2">${news.total_view}</span></div>
-                    <div class="card-actions justify-end">
-                        <button onclick="loadDetails()" class="pt-5"><i class="fa-solid fa-arrow-right"></i></button>
+                    <div>
+                    <a href="#my-modal-2" class="btn" onclick="loadDetails('${news._id}')"><i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -81,24 +82,24 @@ const displayNews = allNews => {
     }
 }
 
-const loadDetails = (newsId) => {
-    url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+const loadDetails = id => {
+    url = `https://openapi.programming-hero.com/api/news/${id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayDetails(data.data))
+        .then(data => displaydetails(data.data))
 }
 
-const displayDetails = newsDetails => {
-    const modalBody = document.getElementById('modalBody')
-    console.log(newsDetails)
-    for (let news of newsDetails) {
+const displaydetails = news => {
+    console.log(news)
+    const modalBody = document.getElementById('modalBody');
+    for (let details of news) {
         modalBody.innerHTML = `
-        <h3 class="font-bold text-lg">${news.title}</h3>
-        <p>${news.details}</p>
-        <img src="${news.image_url ? news.image_url : 'No Image'}">
-        `
+        <h3 class="font-bold text-lg">${details.title}</h3>
+        <p class="py-4">${details.details}</p>
+        <img src="${details.image_url ? details.image_url : 'No Image'}">
+    `
     }
 }
 
+
 displayNews()
-loadDetails();
