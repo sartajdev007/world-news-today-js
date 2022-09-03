@@ -72,7 +72,7 @@ const displayNews = allNews => {
                     </div>
                     <div class="p-6 pl-8"><i class="fa-solid fa-eye"></i><span class="pl-2">${news.total_view}</span></div>
                     <div class="card-actions justify-end">
-                        <button onclick="${loadDetails()}" class="pt-5"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button onclick="loadDetails()" class="pt-5"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -81,8 +81,8 @@ const displayNews = allNews => {
     }
 }
 
-const loadDetails = () => {
-    url = 'https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a';
+const loadDetails = (newsId) => {
+    url = `https://openapi.programming-hero.com/api/news/${newsId}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
@@ -90,8 +90,8 @@ const loadDetails = () => {
 
 const displayDetails = newsDetails => {
     const modalBody = document.getElementById('modalBody')
+    console.log(newsDetails)
     for (let news of newsDetails) {
-        // console.log(news);
         modalBody.innerHTML = `
         <h3 class="font-bold text-lg">${news.title}</h3>
         <p>${news.details}</p>

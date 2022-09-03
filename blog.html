@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/c5ae7d12de.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header section start -->
+    <header class="container mx-auto">
+        <!-- nav section -->
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <a class="btn btn-ghost normal-case text-xl"><span class=" bg-sky-500 p-2 rounded-lg text-white">World
+                        News</span><span class="pl-1 text-blue-600">Today</span></a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal p-0">
+                    <li><a class="hover:bg-sky-700 hover:text-white active:bg-sky-700" href="index.html">News</a></li>
+                    <li><a class="hover:bg-sky-700 hover:text-white active:bg-sky-700" active>Blog</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- nav section -->
+        <hr class=" mt-4">
+    </header>
+    <!-- header section end -->
+    <main>
+        <!-- accordion section -->
+        <section class="mt-10 mx-auto">
+            <div class="collapse">
+                <input type="checkbox" class="peer" />
+                <div
+                    class=" text-center collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                    The Difference Between var/let/const
+                </div>
+                <div
+                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                    <p>var keyword in JavaScript: The var is the oldest keyword to declare a variable in JavaScript.
+
+                        Scope: Global scoped or function scoped. The scope of the var keyword is the global or function
+                        scope. It means variables defined outside the function can be accessed globally, and variables
+                        defined inside a particular function can be accessed within the function. </p>
+                    <p>
+                        let keyword in JavaScript: The let keyword is an improved version of the var keyword.
+
+                        Scope: block scoped: The scope of a let variable is only block scoped. It can’t be accessible
+                        outside the particular block ({block}). Let’s see the below example.
+                    </p>
+                    <p>
+                        const keyword in JavaScript: The const keyword has all the properties that are the same as the
+                        let keyword, except the user cannot update it.
+
+                        Scope: block scoped: When users declare a const variable, they need to initialize it, otherwise,
+                        it returns an error. The user cannot update the const variable once it is declared.
+                    </p>
+                </div>
+            </div>
+            <div class="collapse pt-5">
+                <input type="checkbox" class="peer" />
+                <div
+                    class="text-center collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                    Difference Between Arrow and Normal Function
+                </div>
+                <div
+                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                    <p>Inside of a regular JavaScript function, this value (aka the execution context) is dynamic.
+
+                        The dynamic context means that the value of this depends on how the function is invoked. In
+                        JavaScript, there are 4 ways you can invoke a regular function.</p>
+                    <p>
+                        The behavior of this inside of an arrow function differs considerably from the regular
+                        function's this behavior. The arrow function doesn't define its own execution context.
+
+                        No matter how or where being executed, this value inside of an arrow function always equals this
+                        value from the outer function. In other words, the arrow function resolves this lexically.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- accordion section -->
+    </main>
+
+    <!-- scripts -->
+    <script src=" https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
