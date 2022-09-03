@@ -44,10 +44,15 @@ const displayNews = allNews => {
         div.innerHTML = `
         <h2 class="font-bold text-center text-3xl text-red-500">No news today</h2>       
         `
-        newsContainer.appendChild(div)
+        newsContainer.appendChild(div);
         return;
     }
-
+    else {
+        const numberPosts = document.getElementById('numberPosts');
+        numberPosts.innerHTML = `
+        <h2 class="text-lg font-bold">${allNews.length} posts in this section</h2>
+        `;
+    }
     for (let news of allNews) {
         // console.log(news)
         const div = document.createElement('div');
@@ -80,6 +85,7 @@ const displayNews = allNews => {
         `
         newsContainer.appendChild(div);
     }
+    toggleLoader(false);
 }
 
 const loadDetails = id => {
@@ -90,7 +96,6 @@ const loadDetails = id => {
 }
 
 const displaydetails = news => {
-    console.log(news)
     const modalBody = document.getElementById('modalBody');
     for (let details of news) {
         modalBody.innerHTML = `
@@ -98,6 +103,16 @@ const displaydetails = news => {
         <p class="py-4">${details.details}</p>
         <img src="${details.image_url ? details.image_url : 'No Image'}">
     `
+    }
+}
+
+const toggleLoader = isLoading => {
+    const loader = document.getElementById('spinner');
+    if (isLoading) {
+        loader.classList.remove('hidden');
+    }
+    else {
+        loader.classList.add('hidden');
     }
 }
 
