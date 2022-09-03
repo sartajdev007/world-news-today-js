@@ -4,6 +4,7 @@ const loadMenu = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayMenu(data.data.news_category))
+    // .catch(error => console.log(error));
 }
 const toggleLoader = isLoading => {
     const loader = document.getElementById('spinner');
@@ -49,6 +50,7 @@ const loadCategory = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNews(data.data))
+    // .catch(error => console.log(error));
 }
 
 
@@ -60,9 +62,11 @@ loadMenu()
 
 
 const displayNews = (allNews = []) => {
+    // sorting from largest view
     const sortedNews = allNews?.sort((a, b) =>
         a.total_view < b.total_view ? 1 : -1
     );
+
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
     if (allNews?.length === 0) {
@@ -117,11 +121,13 @@ const displayNews = (allNews = []) => {
     toggleLoader(false);
 }
 
+// dynamic data for modals
 const loadDetails = id => {
     url = `https://openapi.programming-hero.com/api/news/${id}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displaydetails(data.data))
+    // .catch(error => console.log(error));
 }
 
 const displaydetails = news => {
