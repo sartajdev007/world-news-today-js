@@ -4,7 +4,7 @@ const loadMenu = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayMenu(data.data.news_category))
-    // .catch(error => console.log(error));
+        .catch(error => console.log(error));
 }
 const toggleLoader = isLoading => {
     const loader = document.getElementById('spinner');
@@ -50,7 +50,7 @@ const loadCategory = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNews(data.data))
-    // .catch(error => console.log(error));
+        .catch(error => console.log(error));
 }
 
 
@@ -127,7 +127,7 @@ const loadDetails = id => {
     fetch(url)
         .then(res => res.json())
         .then(data => displaydetails(data.data))
-    // .catch(error => console.log(error));
+        .catch(error => console.log(error));
 }
 
 const displaydetails = news => {
