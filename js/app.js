@@ -5,19 +5,42 @@ const loadMenu = () => {
         .then(res => res.json())
         .then(data => displayMenu(data.data.news_category))
 }
-
-const displayMenu = (categories) => {
-    const menuContainer = document.getElementById('menu-container');
-    for (const category of categories) {
-        const id = category.category_id;
-        const li = document.createElement('li');
-        li.innerHTML = `<a id="category-btn" class="hover:bg-violet-700 hover:text-white" onclick="loadCategory(${id})">${category.category_name}</a>`
-        menuContainer.appendChild(li);
+const toggleLoader = isLoading => {
+    const loader = document.getElementById('spinner');
+    if (isLoading) {
+        loader.classList.remove('hidden');
+    }
+    else {
+        loader.classList.add('hidden');
     }
 }
 
+let newestId = "01";
+const addActiveClass = (id) => {
+    if (newestId) {
+        const loader = document.getElementById(newestId);
+        loader.classList.remove("text-blue-500");
+    }
+    const uid = "0" + id;
+    const loader = document.getElementById(uid);
+    loader.classList.add("text-blue-500");
+    newestId = uid;
+};
+
+const displayMenu = (categories) => {
+    const menuContainer = document.getElementById("menu-container");
+    for (const category of categories) {
+        const id = category.category_id;
+        const li = document.createElement("li");
+        li.innerHTML = `<a id=${id} class="hover:bg-blue-700 hover:text-white" onclick="loadCategory(${id}); addActiveClass(${id})">${category.category_name}</a>`;
+        menuContainer.appendChild(li);
+    }
+    document.getElementById("01").classList.add("text-blue-500");
+};
+
 
 const loadCategory = (id) => {
+    toggleLoader(true);
     let categoryId = 1;
     if (id) {
         categoryId = id;
@@ -36,24 +59,30 @@ loadMenu()
 // display news script
 
 
-const displayNews = allNews => {
+const displayNews = (allNews = []) => {
+    const sortedNews = allNews?.sort((a, b) =>
+        a.total_view < b.total_view ? 1 : -1
+    );
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
-    if (allNews.length === 0) {
+    if (allNews?.length === 0) {
         const div = document.createElement('div');
         div.innerHTML = `
         <h2 class="font-bold text-center text-3xl text-red-500">No news today</h2>       
         `
         newsContainer.appendChild(div);
-        return;
+        const numberPosts = document.getElementById('numberPosts');
+        numberPosts.innerHTML = `
+        <h2 class="text-lg font-bold">${allNews?.length} posts in this section</h2>
+        `;
     }
     else {
         const numberPosts = document.getElementById('numberPosts');
         numberPosts.innerHTML = `
-        <h2 class="text-lg font-bold">${allNews.length} posts in this section</h2>
+        <h2 class="text-lg font-bold">${allNews?.length} posts in this section</h2>
         `;
     }
-    for (let news of allNews) {
+    for (let news of sortedNews) {
         // console.log(news)
         const div = document.createElement('div');
         div.classList.add('card');
@@ -106,15 +135,6 @@ const displaydetails = news => {
     }
 }
 
-const toggleLoader = isLoading => {
-    const loader = document.getElementById('spinner');
-    if (isLoading) {
-        loader.classList.remove('hidden');
-    }
-    else {
-        loader.classList.add('hidden');
-    }
-}
 
 
 displayNews()
